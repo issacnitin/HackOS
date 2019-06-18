@@ -85,18 +85,70 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
  
 void terminal_putchar(char c) 
 {
+        if(c == '\n') {
+	  terminal_column = 0;
+	  terminal_row++;
+	  return;
+	}
 	terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
+	
 	if (++terminal_column == VGA_WIDTH) {
 		terminal_column = 0;
 		if (++terminal_row == VGA_HEIGHT)
 			terminal_row = 0;
 	}
 }
+
+void terminal_putnumber_helper(int n)
+{
+  switch(n) {
+  case 1: terminal_putchar('1'); break;
+  case 2: terminal_putchar('2'); break;
+  case 3: terminal_putchar('3'); break;
+  case 4: terminal_putchar('4'); break;
+  case 5: terminal_putchar('5'); break;
+  case 6: terminal_putchar('6'); break;
+  case 7: terminal_putchar('7'); break;
+  case 8: terminal_putchar('8'); break;
+  case 9: terminal_putchar('9'); break;
+  case 0: terminal_putchar('0'); break;
+  default: break;
+  }
+}
+
+void terminal_putnumber(int n)
+{
+  int i = 0, t = 0;
+  while(n != 0) {
+    t += n%10;
+    t *= 10;
+    n /= 10;
+  }
+
+  t /= 10;
+  
+  while(t != 0) {
+    terminal_putnumber_helper(t%10);
+    t /= 10;
+  }
+}
  
 void terminal_write(const char* data, size_t size) 
 {
-	for (size_t i = 0; i < size; i++)
-		terminal_putchar(data[i]);
+  int lines = 0, width_count = 0;
+  int startpos = 0;
+  for(int i = 0; i < size; i++) {
+    width_count++;
+    if(width_count == VGA_WIDTH){
+      
+    }
+    else if(data[i] == '\n') {
+      width_count = 0;
+      lines++;
+    }
+  }
+
+  int startpos = 
 }
  
 void terminal_writestring(const char* data) 
@@ -110,5 +162,5 @@ void kernel_main(void)
 	terminal_initialize();
  
 	/* Newline support is left as an exercise. */
-	terminal_writestring("Hello, kernel World!\n");
+	terminal_writestring("Hello, kernel World!\nABCdashidhasiuodhuioashfiuashfdasuidhiuasdhuiashdiuashduiashduiasdausidhasuidhasuidhasuihdiuashdiuasdhiuasdhiuasdhiuasdhiuashdashuduiashd\nduygasyduasgfyuasgfuy\nuysawGDUYSAGDuyasdgu\n8979ed8sfa9hfasuidhiuasdiafhaiushdfiasfbuasfhiuashciuashfiusadaslkfjdasokfgndaskjhf iushdagfasghaisdu  sodigosa gisiosad gisod i sd goisd hgos dagois dahgoishdaogihsdoighsoi dgiosad goisda hgoishd agoisdaoigisad giosdh agiohsad ogisaodig hiosad goisd ahgoisa dhgoisdaogisdg oisdh\n agoisdh aoigsdagio sdgoih gosiaao sgdo sgdos dahoihsd oigsdoiagios dgoisad gois\nad hgafsdfk jslkagosadgoshdgohsdwphgpiosudhgisu  soidhg oisadh g s s sdoiogisd h\noos dois dhgoi sagoishdgosdog  sidghoisd gosdgosgoi s  shsgodihs  s ahgsagoissgd\na g sd gf sdg  sdga  sadg  sadg  sadg sad g asd g sda g sadg  sgda asdgsdag sgd \n sdga  sgad  gdsa oisdh goisdoigsoidgsoida ghoisadgoisd goi sadgsaoidgasdjhasi hasoihfoashfoiasoifas oifasoi foasifoiashfgoiashASDL; AJFGOISADHGOISADHG;SD;AGHOSDAIH GASDGSDHAGIOSDH GO[ISDAHG[SDAIH GISDAHGISD ISDHGOIHSDOGHSDOIFNOSDN GO OSODJ HOGISADGOHSDOIAGSPEJio sdhfosdhgoshdgohasoghosd hgoisdg hoiashdogisdoighosidgois dhgoisdogihsdoaighoisadhgoisdhgiosh agoiasd goihsdoigasdiohgiosdhgoishgiohsdaoigsi oisiogsaoisoi   sdiugioa   sadoigh o fogiasoigfhaosihfoiashfoiasfodiuasoifhasoighasoihoi aoias oiashoiasoifasfioasiofioasfoiaoisfoasfhoiashfhg98puaerwgi[werigh[sweG[OESWA[GOEWSH[G[osewIGAHEQWGHw[WGio WGIO[WHEGOWG[WGI[WE Gi[WE[GI[IGwegIOEAWGOiahrewspoghwg8439t9438t924T9384EW94T39");
 }
