@@ -135,20 +135,10 @@ void terminal_putnumber(int n)
  
 void terminal_write(const char* data, size_t size) 
 {
-  int lines = 0, width_count = 0;
-  int startpos = 0;
-  for(int i = 0; i < size; i++) {
-    width_count++;
-    if(width_count == VGA_WIDTH){
-      
-    }
-    else if(data[i] == '\n') {
-      width_count = 0;
-      lines++;
-    }
-  }
-
-  int startpos = 
+  int *t = malloc(sizeof(int)*65535);
+  // To be used for handling \n
+  for (size_t i = (size%(VGA_HEIGHT*VGA_WIDTH))*(size/(VGA_HEIGHT*VGA_WIDTH)); i < size; i++)
+		terminal_putchar(data[i]);
 }
  
 void terminal_writestring(const char* data) 
@@ -162,5 +152,5 @@ void kernel_main(void)
 	terminal_initialize();
  
 	/* Newline support is left as an exercise. */
-	terminal_writestring("Hello, kernel World!\nABCdashidhasiuodhuioashfiuashfdasuidhiuasdhuiashdiuashduiashduiasdausidhasuidhasuidhasuihdiuashdiuasdhiuasdhiuasdhiuasdhiuashdashuduiashd\nduygasyduasgfyuasgfuy\nuysawGDUYSAGDuyasdgu\n8979ed8sfa9hfasuidhiuasdiafhaiushdfiasfbuasfhiuashciuashfiusadaslkfjdasokfgndaskjhf iushdagfasghaisdu  sodigosa gisiosad gisod i sd goisd hgos dagois dahgoishdaogihsdoighsoi dgiosad goisda hgoishd agoisdaoigisad giosdh agiohsad ogisaodig hiosad goisd ahgoisa dhgoisdaogisdg oisdh\n agoisdh aoigsdagio sdgoih gosiaao sgdo sgdos dahoihsd oigsdoiagios dgoisad gois\nad hgafsdfk jslkagosadgoshdgohsdwphgpiosudhgisu  soidhg oisadh g s s sdoiogisd h\noos dois dhgoi sagoishdgosdog  sidghoisd gosdgosgoi s  shsgodihs  s ahgsagoissgd\na g sd gf sdg  sdga  sadg  sadg  sadg sad g asd g sda g sadg  sgda asdgsdag sgd \n sdga  sgad  gdsa oisdh goisdoigsoidgsoida ghoisadgoisd goi sadgsaoidgasdjhasi hasoihfoashfoiasoifas oifasoi foasifoiashfgoiashASDL; AJFGOISADHGOISADHG;SD;AGHOSDAIH GASDGSDHAGIOSDH GO[ISDAHG[SDAIH GISDAHGISD ISDHGOIHSDOGHSDOIFNOSDN GO OSODJ HOGISADGOHSDOIAGSPEJio sdhfosdhgoshdgohasoghosd hgoisdg hoiashdogisdoighosidgois dhgoisdogihsdoaighoisadhgoisdhgiosh agoiasd goihsdoigasdiohgiosdhgoishgiohsdaoigsi oisiogsaoisoi   sdiugioa   sadoigh o fogiasoigfhaosihfoiashfoiasfodiuasoifhasoighasoihoi aoias oiashoiasoifasfioasiofioasfoiaoisfoasfhoiashfhg98puaerwgi[werigh[sweG[OESWA[GOEWSH[G[osewIGAHEQWGHw[WGio WGIO[WHEGOWG[WGI[WE Gi[WE[GI[IGwegIOEAWGOiahrewspoghwg8439t9438t924T9384EW94T39");
+	terminal_writestring("Hello, kernel World!ABCdashidhasiuodhuioashfiuashfdasuidhiuasdhuiashdiuashduiashduiasdausidhasuidhasuidhasuihdiuashdiuasdhiuasdhiuasdhiuasdhiuashdashuduiashdduygasyduasgfyuasgfuyuysawGDUYSAGDuyasdgu8979ed8sfa9hfasuidhiuasdiafhaiushdfiasfbuasfhiuashciuashfiusadaslkfjdasokfgndaskjhf iushdagfasghaisdu  sodigosa gisiosad gisod i sd goisd hgos dagois dahgoishdaogihsdoighsoi dgiosad goisda hgoishd agoisdaoigisad giosdh adaskjhfgiohsad ogisaodig hiosad goisd ahgoisa dhgoisdaogisdg oisdh agoisdh aoigsdagio sdgoih gosiaao sgdo sgdos dahoihsd oigsdoiagios dgoisad goisad hgafsdfk jslkagosadgoshdgohsdwphgpiosudhgisu  soidhg oisadh g s s sdoiogisd hoos dois dhgoi sagoishdgosdog  sidghoisd gosdgosgoi s  shsgodihs  s ahgsagoisoisdh goisdoigsoidgsoida ghoisadgoisd goi sadgsaoidgasdjhasi hasoihfoashfoiasoifas oifasoi foasifoiashfgoiashASDL; AJFGOISADHGOISADHG;SD;AGHOSDAIH GASDGSDHAGIOSDH GO[ISDAHG[SDAIH GISDAHGISD ISDHGOIHSDOGHSDOIFNOSDN GO OSODJ HOGISADGOHSDOIAGSPEJio sdhfosdhgoshdgohasoghosd hgoisdg hoiashdogisdoighosidgois dhgoisdogihsdoaighoisadhgoisdhgiosh agoiasd goihsdoigasdiohgiosdhgoishgiohsdaoigsi oisiogsaoisoi   sdiugioa   sadoigh o fogiasoigfhaosihfoiashfoiasfodiuasoifhasoighasoihoi aoias oiashoiasoifasfioasiofioasfoiaoisfoasfhoiashfhg98puaerwgi[werigh[sweG[OESWA[GOEWSH[G[osewIGAHEQWGHw[WGio WGIO[WHEGOWG[WGI[WE Gi[WE[GI[IGwegIOEAWGOiahrewspoghwg8439tdasf aslkjflaksjfglaglsadgksdahgsad hglksadhglsadglsjdalgkjsadlglsad gjoisdajg oisidagos dahgoas;fkjasokf oasifoiasfj ioasfgoiasjfioas foiasfjoias jfoiasjfioasjfoiasjfoijasfoijasoifasofasjfoiasjioasas  a sfijasofoias  a asoif jaos f a fai sfoias jfoiajsfoi  afaois foas fa ifioaoi aso iaioa sfa sf 9438t924T9384EW94T39dasdalskflk askfjoasj foiasjf oiasfjoias foias fas fasoifioas fasjiofdjoifa9083ur823ur 0923 u023ur09 23r028r23r8203498tu02fgiweqgofiweg   gewq gowieofgiwejdasd fajskfhsiadgf hasidghsiudhgiasd ghoaiusd ghdshgoiuhsdag hsdoaghosda ghosad hgoisdgoisadoigsodaigoiasd ghsdagoisd hagoisdaoigosiadgo sgdahoisadhgoisdaogisdoiagosadgosdi aghoisadgoidsgoisadhgiosdgoisdgaoihsdoiaosidagoai sdghoigasoi foiuweqas dfhaksjfhajs f");
 }
